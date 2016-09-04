@@ -15,18 +15,17 @@ class Cell {
   eliminatePossibleValue(value) {
     let index = this._possibleValues.indexOf(value);
 
-    if(index === -1) {
+    if (index === -1) {
       return true;
     }
 
-    if(this.isSolved() && value === this._value) {
+    if (this.isSolved() && value === this._value) {
       return false;
     }
 
     this._possibleValues.splice(index, 1);
 
-    // MOVE THIS
-    if(this._possibleValues.length === 1) {
+    if (this._possibleValues.length === 1) {
       this._value = this._possibleValues[0];
     }
 
@@ -45,7 +44,7 @@ class Cell {
     let cell = new Cell();
     cell._possibleValues = [];
 
-    for(let i = 0; i < this._possibleValues.length; i++) {
+    for (let i = 0; i < this._possibleValues.length; i++) {
       cell._possibleValues.push(this._possibleValues[i]);
     }
     cell._value = this._value;

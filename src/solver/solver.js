@@ -27,40 +27,40 @@ class Solver {
   }
 
   search(grid) {
-    if(!grid) {
+    if (!grid) {
       return false;
     }
 
     let solved = true;
-    for(let i = 0; i < grid.cells.length; i++) {
+    for (let i = 0; i < grid.cells.length; i++) {
       solved = solved && grid.cells[i].isSolved();
     }
 
-    if(solved) {
+    if (solved) {
       return grid;
     }
 
     let cellMinPossibleValues;
-    for(let index = 0, cell; index < grid.cells.length; index++) {
+    for (let index = 0, cell; index < grid.cells.length; index++) {
       cell = grid.cells[index];
-      if(cell.isSolved()) {
+      if (cell.isSolved()) {
         continue;
       }
 
-      if(!cellMinPossibleValues || (cellMinPossibleValues.cell.possibleValues.length > cell.possibleValues.length)) {
+      if (!cellMinPossibleValues || (cellMinPossibleValues.cell.possibleValues.length > cell.possibleValues.length)) {
         cellMinPossibleValues = {
           cell,
           index
         };
       }
     }
-    
-    for(let i = 0; i < cellMinPossibleValues.cell.possibleValues.length; i++) {
-      let copy = grid.copy();
-      
-      let result = this.search(copy.assignValue(cellMinPossibleValues.cell.possibleValues[i], copy.cells[cellMinPossibleValues.index]));
 
-      if(result) {
+    for (let i = 0, copy, result; i < cellMinPossibleValues.cell.possibleValues.length; i++) {
+      copy = grid.copy();
+
+      result = this.search(copy.assignValue(cellMinPossibleValues.cell.possibleValues[i], copy.cells[cellMinPossibleValues.index]));
+
+      if (result) {
         this._grid = result;
       }
     }
@@ -68,10 +68,6 @@ class Solver {
 
   solve() {
 
-  }
-
-  copy() {
-    return new Solver(this._grid.copy());
   }
 }
 

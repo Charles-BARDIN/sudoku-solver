@@ -22,16 +22,16 @@ class Grid {
     let valuesToEliminate = cell.possibleValues.slice();
     let index = valuesToEliminate.indexOf(value);
 
-    if(index === -1) {
+    if (index === -1) {
       return false;
     }
 
     valuesToEliminate.splice(index, 1);
 
-    for(let i = 0, success; i < valuesToEliminate.length; i++) {
+    for (let i = 0, success; i < valuesToEliminate.length; i++) {
       success = this.eliminateValuesFromCell(valuesToEliminate[i], cell);
 
-      if(!success) {
+      if (!success) {
         return false;
       }
     }
@@ -40,24 +40,24 @@ class Grid {
 
   eliminateValuesFromCell(values, cell) {
     let success = cell.eliminatePossibleValue(values);
-    if(!success) {
+    if (!success) {
       return false;
     }
 
-    if(cell.isSolved()) {
+    if (cell.isSolved()) {
       success = this.eliminateValueFromSiblings(cell, cell.value);
 
-      if(!success) {
+      if (!success) {
         return false;
       }
     }
 
     success = this.checkIfSiblingsAcceptValue(cell, values);
 
-    if(!success) {
+    if (!success) {
       return false;
     }
-    for(let i = 0, success; i < values.length; i++) {
+    for (let i = 0, success; i < values.length; i++) {
       success = cell.eliminatePossibleValue(values);
 
       if (!success) {
@@ -74,7 +74,7 @@ class Grid {
 
       success = this.checkIfSiblingsAcceptValue(cell, cell.value);
 
-      if(!success) {
+      if (!success) {
         return false;
       }
     }
@@ -87,7 +87,7 @@ class Grid {
     for (let i = 0, success, wasResolved; i < siblings.length; i++) {
       wasResolved = siblings[i].isSolved();
 
-      if(siblings[i].value === value) {
+      if (siblings[i].value === value) {
         return false;
       }
 
@@ -124,7 +124,7 @@ class Grid {
     if (cellsThatAccept.length === 1) {
       let success = this.assignValue(value, cellsThatAccept[0]);
 
-      if(!success) {
+      if (!success) {
         return false;
       }
     }
@@ -249,7 +249,7 @@ class Grid {
     let grid = new Grid();
     grid._pattern = this._pattern;
 
-    for(var i = 0; i < this._cells.length; i++) {
+    for (var i = 0; i < this._cells.length; i++) {
       grid._cells[i] = this._cells[i].copy();
     }
     return grid;
