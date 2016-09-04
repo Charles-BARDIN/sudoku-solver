@@ -29,7 +29,7 @@ class Grid {
     valuesToEliminate.splice(index, 1);
 
     for (let i = 0, success; i < valuesToEliminate.length; i++) {
-      success = this.eliminateValuesFromCell(valuesToEliminate[i], cell);
+      success = this.eliminateValueFromCell(valuesToEliminate[i], cell);
 
       if (!success) {
         return false;
@@ -38,8 +38,8 @@ class Grid {
     return this;
   }
 
-  eliminateValuesFromCell(values, cell) {
-    let success = cell.eliminatePossibleValue(values);
+  eliminateValueFromCell(value, cell) {
+    let success = cell.eliminatePossibleValue(value);
     if (!success) {
       return false;
     }
@@ -52,13 +52,13 @@ class Grid {
       }
     }
 
-    success = this.checkIfSiblingsAcceptValue(cell, values);
+    success = this.checkIfSiblingsAcceptValue(cell, value);
 
     if (!success) {
       return false;
     }
-    for (let i = 0, success; i < values.length; i++) {
-      success = cell.eliminatePossibleValue(values);
+    for (let i = 0, success; i < value.length; i++) {
+      success = cell.eliminatePossibleValue(value);
 
       if (!success) {
         return false;

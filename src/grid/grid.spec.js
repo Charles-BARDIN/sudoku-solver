@@ -16,8 +16,8 @@ describe('Class: Grid', () => {
     });
 
     describe('assignValue', () => {
-      it('Should call eliminateValuesFromCell', () => {
-        spy = chai.spy.on(grid, 'eliminateValuesFromCell');
+      it('Should call eliminateValueFromCell', () => {
+        spy = chai.spy.on(grid, 'eliminateValueFromCell');
 
         grid.assignValue(9, grid.cells[0]);
 
@@ -41,12 +41,12 @@ describe('Class: Grid', () => {
       });
     });
 
-    describe('eliminateValuesFromCell', () => {
+    describe('eliminateValueFromCell', () => {
       it('Should call the eliminatePossibleValue method of the cell', () => {
         cell = grid.cells[0];
         spy = chai.spy.on(cell, 'eliminatePossibleValue');
 
-        grid.eliminateValuesFromCell([1], cell);
+        grid.eliminateValueFromCell([1], cell);
 
         expect(spy).to.have.been.called.with([1]);
       });
@@ -55,7 +55,7 @@ describe('Class: Grid', () => {
         cell = grid.cells[0];
         spy = chai.spy.on(cell, 'isSolved');
 
-        grid.eliminateValuesFromCell([1], cell);
+        grid.eliminateValueFromCell([1], cell);
 
         expect(spy).to.have.been.called();
       });
@@ -64,14 +64,14 @@ describe('Class: Grid', () => {
         cell = grid.cells[0];
         spy = chai.spy.on(grid, 'eliminateValueFromSiblings');
 
-        grid.eliminateValuesFromCell(1, cell);
-        grid.eliminateValuesFromCell(2, cell);
-        grid.eliminateValuesFromCell(3, cell);
-        grid.eliminateValuesFromCell(4, cell);
-        grid.eliminateValuesFromCell(5, cell);
-        grid.eliminateValuesFromCell(6, cell);
-        grid.eliminateValuesFromCell(7, cell);
-        grid.eliminateValuesFromCell(8, cell);
+        grid.eliminateValueFromCell(1, cell);
+        grid.eliminateValueFromCell(2, cell);
+        grid.eliminateValueFromCell(3, cell);
+        grid.eliminateValueFromCell(4, cell);
+        grid.eliminateValueFromCell(5, cell);
+        grid.eliminateValueFromCell(6, cell);
+        grid.eliminateValueFromCell(7, cell);
+        grid.eliminateValueFromCell(8, cell);
 
         if (cell.isSolved()) {
           expect(spy).to.have.been.called.with(cell, cell.value);
@@ -84,7 +84,7 @@ describe('Class: Grid', () => {
         cell = grid.cells[0];
         spy = chai.spy.on(grid, 'checkIfSiblingsAcceptValue');
 
-        grid.eliminateValuesFromCell(1, cell);
+        grid.eliminateValueFromCell(1, cell);
 
         expect(spy).to.have.been.called.with(cell, 1);
       });
@@ -92,30 +92,30 @@ describe('Class: Grid', () => {
       it('Should return false if it encounter any inconsistency', () => {
         cell = grid.cells[0];
 
-        grid.eliminateValuesFromCell(1, cell);
-        grid.eliminateValuesFromCell(2, cell);
-        grid.eliminateValuesFromCell(3, cell);
-        grid.eliminateValuesFromCell(4, cell);
-        grid.eliminateValuesFromCell(5, cell);
-        grid.eliminateValuesFromCell(6, cell);
-        grid.eliminateValuesFromCell(7, cell);
-        grid.eliminateValuesFromCell(8, cell);
+        grid.eliminateValueFromCell(1, cell);
+        grid.eliminateValueFromCell(2, cell);
+        grid.eliminateValueFromCell(3, cell);
+        grid.eliminateValueFromCell(4, cell);
+        grid.eliminateValueFromCell(5, cell);
+        grid.eliminateValueFromCell(6, cell);
+        grid.eliminateValueFromCell(7, cell);
+        grid.eliminateValueFromCell(8, cell);
 
-        expect(grid.eliminateValuesFromCell([9], cell)).to.equal(false);
+        expect(grid.eliminateValueFromCell([9], cell)).to.equal(false);
       });
 
       it('Should return true and have removed the values from the cell\'s possible values if it does not encounter any inconsistency', () => {
         cell = grid.cells[0];
 
-        grid.eliminateValuesFromCell(1, cell);
-        grid.eliminateValuesFromCell(2, cell);
-        grid.eliminateValuesFromCell(3, cell);
-        grid.eliminateValuesFromCell(4, cell);
-        grid.eliminateValuesFromCell(5, cell);
-        grid.eliminateValuesFromCell(6, cell);
-        grid.eliminateValuesFromCell(7, cell);
+        grid.eliminateValueFromCell(1, cell);
+        grid.eliminateValueFromCell(2, cell);
+        grid.eliminateValueFromCell(3, cell);
+        grid.eliminateValueFromCell(4, cell);
+        grid.eliminateValueFromCell(5, cell);
+        grid.eliminateValueFromCell(6, cell);
+        grid.eliminateValueFromCell(7, cell);
 
-        expect(grid.eliminateValuesFromCell(9, cell)).to.equal(true);
+        expect(grid.eliminateValueFromCell(9, cell)).to.equal(true);
         expect(cell.possibleValues).to.have.members([8]);
       });
     });
