@@ -1,0 +1,21 @@
+// Placez vos paramètres dans ce fichier pour remplacer les paramètres par défaut et les paramètres utilisateur.
+{
+  //-------- JSHint configuration --------
+
+  // Control whether or not jshint is enabled for JavaScript files.
+  "jshint.enable": true,
+
+  // A path to file containing the configuration options for jshint. If the file exists it overrides jshint.options and any .jshintrc file
+  "jshint.config": null,
+
+  // The jshint options object to provide args to the jshint command.
+  "jshint.options": {
+      "esversion": 6
+  },
+
+  // A path to a file containing patterns describing which files and directories should be ignored by jshint. If the file exists it overrides jshint.exclude and any .jshintignore file.
+  "jshint.excludePath": null,
+
+  // Matching files and directories are being ignored by jshint. Glob patterns are interpreted relative to the workspace's root folder.
+  "jshint.exclude": {}
+}
