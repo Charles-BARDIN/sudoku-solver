@@ -64,14 +64,22 @@ class Solver {
         return result;
       }
     }
+
+    return false;
   }
 
   solve() {
     let solvedGrid = this.search(this.setGridValues());
 
+    if(!solvedGrid) {
+      return false;
+    }
+
     for(let i = 0; i < this._grid._cells.length; i++) {
       this._grid._cells[i] = solvedGrid.cells[i];
     }
+
+    return true;
   }
 }
 
