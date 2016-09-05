@@ -1,5 +1,7 @@
 const expect = require('chai').expect;
 
+require('../polyfills');
+
 const Cell = require('./cell');
 
 let cell;
