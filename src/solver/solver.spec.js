@@ -53,15 +53,15 @@ describe('Class: Solver', () => {
 
         let solver = new Solver(grid);
 
-        solver.search(solver.setGridValues());
+        let solved = solver.search(solver.setGridValues());
 
-        for (let i = 0, digit; i < solver._grid.cells.length; i++) {
+        for (let i = 0, digit; i < solved.cells.length; i++) {
           digit = Number(pattern_hard[i]);
 
           if (digit) {
-            expect(solver._grid.cells[i].value).to.equal(digit);
+            expect(solved.cells[i].value).to.equal(digit);
           }
-          expect(solver._grid.cells[i].isSolved()).to.equal(true);
+          expect(solved.cells[i].isSolved()).to.equal(true);
         }
       });
     });

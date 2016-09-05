@@ -1,19 +1,36 @@
 {
   "name": "sudoku_solver",
   "version": "1.0.0",
-  "description": "",
+  "homepage": "https://github.com/Charles-BARDIN/sudoku-solver",
+  "bugs": "https://github.com/Charles-BARDIN/sudoku-solver/issues",
+  "description": "This package is a sudoku solver",
   "main": "index.js",
+  "engines": {
+    "node": ">= 6"
+  },
   "directories": {
-    "test": "test"
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Charles-BARDIN/sudoku-solver.git"
   },
   "scripts": {
-    "test": "mocha \"./src/**/*.spec.js\""
+    "test": "mocha \"./src/**/*.spec.js\"",
+    "demo": "node demo"
   },
-  "author": "",
+  "author": "Charles BARDIN <bardincharles@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
     "mocha": "^3.0.2"
-  }
+  },
+  "keywords": [
+    "sudoku",
+    "node",
+    "solver",
+    "puzzle",
+    "es6"
+  ]
 }

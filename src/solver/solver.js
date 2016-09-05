@@ -61,13 +61,17 @@ class Solver {
       result = this.search(copy.assignValue(cellMinPossibleValues.cell.possibleValues[i], copy.cells[cellMinPossibleValues.index]));
 
       if (result) {
-        this._grid = result;
+        return result;
       }
     }
   }
 
   solve() {
+    let solvedGrid = this.search(this.setGridValues());
 
+    for(let i = 0; i < this._grid._cells.length; i++) {
+      this._grid._cells[i] = solvedGrid.cells[i];
+    }
   }
 }
 

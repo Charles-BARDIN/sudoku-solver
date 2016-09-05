@@ -223,15 +223,28 @@ class Grid {
     return squares;
   }
 
-  displayGrid() {
+  display(item) {
+    let type;
+
+    if(typeof item === 'string') {
+      type = 'string';
+    } else if (item instanceof Cell) {
+      type = 'cell';
+    }
+
     let output = '';
     let divider = '\n------ ------- ------\n';
 
-    let last = this._cells.length - 1;
+    let last = item.length - 1;
     for (let i = 0, cell; i < (last + 1); i++) {
-      cell = this._cells[i];
+      cell = item[i];
 
-      output += (cell.value) ? (cell.value) : ('.');
+      if(type ==='string') {
+        output += cell;
+      } else {
+        output += (cell.value) ? (cell.value) : ('.');
+      }
+      
       output += ' ';
 
       if ((i % 27 === 26) && (i !== last)) {
@@ -243,6 +256,14 @@ class Grid {
       }
     }
     console.log(output);
+  }
+
+  displayPattern() {
+    this.display(this._pattern);
+  }
+
+  displayGrid() {
+    this.display(this._cells);
   }
 
   copy() {
