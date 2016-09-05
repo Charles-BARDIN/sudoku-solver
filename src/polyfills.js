@@ -13,3 +13,9 @@ if (!Array.prototype.remove) {
     return this.splice(index, 1);
   };
 }
+
+if (!Array.prototype.copy) {
+  Array.prototype.copy = function() {
+    return this.slice();
+  };
+}

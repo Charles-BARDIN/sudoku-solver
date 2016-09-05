@@ -19,7 +19,7 @@ class Grid {
   }
 
   assignValue(value, cell) {
-    let valuesToEliminate = cell.possibleValues.slice();
+    let valuesToEliminate = cell.possibleValues.copy();
     let index = valuesToEliminate.indexOf(value);
 
     if (index === -1) {
