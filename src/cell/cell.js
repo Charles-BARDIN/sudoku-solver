@@ -23,7 +23,7 @@ class Cell {
       return false;
     }
 
-    this._possibleValues.splice(index, 1);
+    this._possibleValues.remove(value);
 
     if (this._possibleValues.length === 1) {
       this._value = this._possibleValues[0];

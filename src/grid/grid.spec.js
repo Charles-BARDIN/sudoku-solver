@@ -3,6 +3,8 @@ const expect = chai.expect;
 const spies = require('chai-spies');
 chai.use(spies);
 
+require('../polyfills');
+
 const Grid = require('./grid');
 const Cell = require('../cell/cell');
 

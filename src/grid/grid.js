@@ -26,7 +26,7 @@ class Grid {
       return false;
     }
 
-    valuesToEliminate.splice(index, 1);
+    valuesToEliminate.remove(value);
 
     for (let i = 0, success; i < valuesToEliminate.length; i++) {
       success = this.eliminateValueFromCell(valuesToEliminate[i], cell);

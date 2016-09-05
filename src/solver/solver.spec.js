@@ -1,5 +1,7 @@
 const expect = require('chai').expect;
 
+require('../polyfills');
+
 const Solver = require('./solver');
 const Grid = require('../grid/grid');
 const Cell = require('../cell/cell');
