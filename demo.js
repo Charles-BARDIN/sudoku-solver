@@ -14,5 +14,5 @@ let diff;
 solver.solve();
 diff = process.hrtime(time);
 
-console.log(`Solved in ${diff[0] * 1e3 + diff[1] / 1e6}ms`);
+console.log(`Solved in ${Number(diff[0] * 1e3 + diff[1] / 1e6).toLocaleString('en')}ms`);
 grid.displayGrid();

@@ -40,14 +40,14 @@ class Cell {
     return (this._possibleValues.indexOf(value) !== -1);
   }
 
-  copy() {
+  static copy(toCopy) {
     let cell = new Cell();
     cell._possibleValues = [];
 
-    for (let i = 0; i < this._possibleValues.length; i++) {
-      cell._possibleValues.push(this._possibleValues[i]);
+    for (let i = 0; i < toCopy.possibleValues.length; i++) {
+      cell._possibleValues.push(toCopy.possibleValues[i]);
     }
-    cell._value = this._value;
+    cell._value = toCopy.value;
 
     return cell;
   }

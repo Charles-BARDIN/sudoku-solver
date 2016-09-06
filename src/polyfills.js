@@ -14,8 +14,8 @@ if (!Array.prototype.remove) {
   };
 }
 
-if (!Array.prototype.copy) {
-  Array.prototype.copy = function() {
-    return this.slice();
+if (!Array.copy) {
+  Array.copy = function (array) {
+    return array.slice();
   };
 }
