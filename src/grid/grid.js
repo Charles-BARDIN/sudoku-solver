@@ -68,82 +68,28 @@ class Grid {
     if (!success) {
       return false;
     }
+    
+    this.setSiblings();
 
     if (cell.isSolved()) {
-      success = this.eliminateValueFromSiblings(cell, cell.value);
+      success = this._siblings.eliminateValueFromSiblings(cell, cell.value);
 
       if (!success) {
         return false;
       }
     }
 
-    success = this.checkIfSiblingsAcceptValue(cell, value);
+    success = this.checkSiblingsValue(cell, value);
 
     if (!success) {
       return false;
     }
-    for (let i = 0, success; i < value.length; i++) {
-      success = cell.eliminatePossibleValue(value);
-
-      if (!success) {
-        return false;
-      }
-
-      if (cell.isSolved()) {
-        success = this.eliminateValueFromSiblings(cell, cell.value);
-
-        if (!success) {
-          return false;
-        }
-      }
-
-      success = this.checkIfSiblingsAcceptValue(cell, cell.value);
-
-      if (!success) {
-        return false;
-      }
-    }
 
     return true;
   }
 
-  eliminateValueFromSiblings(cell, value) {
-    this.setSiblings();
-
-    let siblings = this._siblings.get(cell);
-    for (let i = 0, success, wasResolved; i < siblings.length; i++) {
-      wasResolved = siblings[i].isSolved();
-
-      if (siblings[i].value === value) {
-        return false;
-      }
-
-      success = siblings[i].eliminatePossibleValue(value);
-      if (!success) {
-        return false;
-      }
-
-      if (siblings[i].isSolved() && !wasResolved) {
-        success = this.eliminateValueFromSiblings(siblings[i], siblings[i].value);
-
-        if (!success) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  checkIfSiblingsAcceptValue(cell, value) {
-    this.setSiblings();
-    let cellsThatAccept = [];
-    let siblings = this._siblings.get(cell);
-
-    for (let i = 0; i < siblings.length; i++) {
-      if (siblings[i].acceptsValue(value)) {
-        cellsThatAccept.push(siblings[i]);
-      }
-    }
+  checkSiblingsValue(cell, value) {
+    let cellsThatAccept = this._siblings.checkIfSiblingsAcceptValue(cell, value)
 
     if (cellsThatAccept.length === 0) {
       return false;

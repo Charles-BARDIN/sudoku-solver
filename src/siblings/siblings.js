@@ -16,6 +16,44 @@ class Siblings {
     return this._siblings.get(cell);
   }
 
+  eliminateValueFromSiblings(cell, value) {
+    let siblings = this._siblings.get(cell);
+    for (let i = 0, success, wasResolved; i < siblings.length; i++) {
+      wasResolved = siblings[i].isSolved();
+
+      if (siblings[i].value === value) {
+        return false;
+      }
+
+      success = siblings[i].eliminatePossibleValue(value);
+      if (!success) {
+        return false;
+      }
+
+      if (siblings[i].isSolved() && !wasResolved) {
+        success = this.eliminateValueFromSiblings(siblings[i], siblings[i].value);
+
+        if (!success) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  checkIfSiblingsAcceptValue(cell, value) {
+    let cellsThatAccept = [];
+    let siblings = this._siblings.get(cell);
+
+    for (let i = 0; i < siblings.length; i++) {
+      if (siblings[i].acceptsValue(value)) {
+        cellsThatAccept.push(siblings[i]);
+      }
+    }
+
+    return cellsThatAccept;
+  }
+
   getCellSiblings(cell) {
     let row = this.getRow(cell);
     let column = this.getColumn(cell);
