@@ -1,73 +1,131 @@
 const expect = require('chai').expect;
-
-require('../polyfills');
-
 const Solver = require('./solver');
 const Grid = require('../grid/grid');
-const Cell = require('../cell/cell');
 
-let pattern = '..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..';
-let pattern_hard = '..53.....8......2..7..1.5..4....53...1..7...6..32...8..6.5....9..4....3......97..';
+const pattern = '..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..';
+const pattern_hard = '..53.....8......2..7..1.5..4....53...1..7...6..32...8..6.5....9..4....3......97..';
+const pattern_bad = '11...............................................................................';
+
+let solver, grid, hard_grid;
+
+require('../polyfills/polyfills');
 
 describe('Class: Solver', () => {
   describe('Methods', () => {
-    describe('setGridValues', () => {
-      it('Should have set all the values from the pattern on the grid', () => {
-        let grid = new Grid(pattern_hard);
+    beforeEach(() => {
+      solver = new Solver();
+      grid = new Grid(pattern);
+    });
 
-        let solver = new Solver(grid);
+    describe('Public', () => {
+      describe('solve', () => {
+        it('Should accept a grid as a parameter', () => {
+          expect(() => { solver.solve(grid); }).to.not.throw();
+        });
 
-        solver.setGridValues();
+        it('Should throw an error if the parameter is not a grid', () => {
+          expect(() => { solver.solve(1); }).to.throw(TypeError);
+          expect(() => { solver.solve('1'); }).to.throw(TypeError);
+          expect(() => { solver.solve([1]); }).to.throw(TypeError);
+          expect(() => { solver.solve({}); }).to.throw(TypeError);
+          expect(() => { solver.solve(); }).to.throw(TypeError);
+        });
 
-        for (let i = 0, digit; i < grid.cells.length; i++) {
-          digit = Number(pattern_hard[i]);
+        it('Should return null if the grid is not solvable', () => {
+          expect(solver.solve(new Grid(pattern_bad))).to.be.null;
+        });
 
-          if (isNaN(digit) || digit === 0) {
-            continue;
+        it('Should solve any grids', () => {
+          let _grid = solver.solve(grid);
+          expect(_grid.isSolved()).to.be.true;
+
+          for (let i = 0; i < pattern.length; i++) {
+            if (!(isNaN(Number(pattern[i])))) {
+              expect(Number(pattern[i])).to.equal(_grid.cells[i].value);
+            }
           }
-          expect(grid.cells[i].value).to.equal(digit);
-        }
-      });
 
-      it('Should resolve an easy grid', () => {
-        let grid = new Grid(pattern);
+          _grid = solver.solve(new Grid(pattern_hard));
+          expect(_grid.isSolved()).to.be.true;
 
-        let solver = new Solver(grid);
-
-        solver.setGridValues();
-
-        for (let i = 0, digit; i < grid.cells.length; i++) {
-          digit = Number(pattern[i]);
-
-          if (digit) {
-            expect(grid.cells[i].value).to.equal(digit);
+          for (let i = 0; i < pattern_hard.length; i++) {
+            if (!(isNaN(Number(pattern_hard[i])))) {
+              expect(Number(pattern_hard[i])).to.equal(_grid.cells[i].value);
+            }
           }
-          expect(grid.cells[i].isSolved()).to.equal(true);
-        }
+        });
       });
     });
 
-    describe('search', () => {
-      it('Should resolve a hard grid', () => {
-        let grid = new Grid(pattern_hard);
+    describe('Private', () => {
+      describe('setPatternValues', () => {
+        it('Should accept a grid as a parameter', () => {
+          expect(() => { solver._setPatternValues(grid); }).to.not.throw();
+        });
 
-        let solver = new Solver(grid);
+        it('Should throw an error if the parameter is not a grid', () => {
+          expect(() => { solver._setPatternValues(1); }).to.throw(TypeError);
+          expect(() => { solver._setPatternValues('1'); }).to.throw(TypeError);
+          expect(() => { solver._setPatternValues([1]); }).to.throw(TypeError);
+          expect(() => { solver._setPatternValues({}); }).to.throw(TypeError);
+          expect(() => { solver._setPatternValues(); }).to.throw(TypeError);
+        });
 
-        let solved = solver.search(solver.setGridValues());
+        it('Should return null if the pattern has any inconsistency', () => {
+          expect(solver._setPatternValues(new Grid(pattern_bad))).to.be.null;
+        });
 
-        for (let i = 0, digit; i < solved.cells.length; i++) {
-          digit = Number(pattern_hard[i]);
+        it('Should have assigned all the values from the pattern', () => {
+          solver._setPatternValues(grid);
 
-          if (digit) {
-            expect(solved.cells[i].value).to.equal(digit);
+          for (let i = 0; i < pattern.length; i++) {
+            if (!(isNaN(Number(pattern[i])))) {
+              expect(Number(pattern[i])).to.equal(grid.cells[i].value);
+            }
           }
-          expect(solved.cells[i].isSolved()).to.equal(true);
-        }
+        });
+
+        it('Should have guessed some values', () => {
+          let _grid = solver._setPatternValues(new Grid('12345678.........................................................................'));
+
+          expect(_grid.cells[8].value).to.equal(9);
+          expect(_grid.cells[8].isSolved()).to.be.true;
+        });
+
+        it('Should resolve a simple grid', () => {
+          let _grid = solver._setPatternValues(grid);
+          expect(_grid.isSolved()).to.be.true;
+        });
       });
-    });
 
-    describe('solve', () => {
+      describe('search', () => {
+        it('Should accept a grid as a parameter', () => {
+          expect(() => { solver._search(grid); }).to.not.throw();
+        });
 
+        it('Should throw an error if the parameter is given and is not a grid', () => {
+          expect(() => { solver._search(1); }).to.throw(TypeError);
+          expect(() => { solver._search('1'); }).to.throw(TypeError);
+          expect(() => { solver._search([1]); }).to.throw(TypeError);
+          expect(() => { solver._search({}); }).to.throw(TypeError);
+        });
+
+        it('Should solve any solvable grids', () => {
+          hard_grid = new Grid(pattern_hard);
+
+          expect(solver._search(grid)).to.be.an.instanceof(Grid);
+          expect(solver._search(hard_grid)).to.be.an.instanceof(Grid);
+
+          expect(solver._search(grid).isSolved()).to.be.true;
+          expect(solver._search(hard_grid).isSolved()).to.be.true;
+        });
+
+        it('Should return null if parameter is not given', () => {
+          expect(solver._search()).to.be.null;
+          expect(solver._search(undefined)).to.be.null;
+          expect(solver._search(null)).to.be.null;
+        });
+      });
     });
   });
 });
