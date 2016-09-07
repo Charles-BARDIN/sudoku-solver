@@ -1,4 +1,4 @@
-require('./src/polyfills');
+require('./src/polyfills/polyfills');
 
 module.exports = {
   Solver: require('./src/solver/solver'),
