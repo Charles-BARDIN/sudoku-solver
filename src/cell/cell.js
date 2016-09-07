@@ -13,6 +13,12 @@ class Cell {
   }
 
   eliminatePossibleValue(value) {
+    if (typeof value !== 'number') {
+      throw new TypeError('eliminatePossibleValue\'s parameter must be a number');
+    } else if ([1, 2, 3, 4, 5, 6, 7, 8, 9].indexOf(value) === -1) {
+      throw new RangeError('eliminatePossibleValue\'s parameter must belong to [0, 9]');
+    }
+
     let index = this._possibleValues.indexOf(value);
 
     if (index === -1) {
@@ -37,10 +43,20 @@ class Cell {
   }
 
   acceptsValue(value) {
+    if (typeof value !== 'number') {
+      throw new TypeError('acceptsValue\'s parameter must be a number');
+    } else if ([1, 2, 3, 4, 5, 6, 7, 8, 9].indexOf(value) === -1) {
+      throw new RangeError('acceptsValue\'s parameter must belong to [0, 9]');
+    }
+
     return (this._possibleValues.indexOf(value) !== -1);
   }
 
   static copy(toCopy) {
+    if (!(toCopy instanceof Cell)) {
+      throw new TypeError('static method copy\'s parameter must be a Cell');
+    }
+
     let cell = new Cell();
     cell._possibleValues = [];
 

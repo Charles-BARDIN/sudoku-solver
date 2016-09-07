@@ -1,16 +1,31 @@
 const Grid = require('../grid/grid');
 
 class Solver {
-  constructor(grid) {
-    this._grid = grid;
+  constructor() { }
+
+  solve(grid) {
+    if (!(grid instanceof Grid)) {
+      throw new TypeError('solve parameter must be a Grid');
+    }
+
+    let _grid = Grid.copy(grid);
+    this._setPatternValues(_grid);
+
+    let solvedGrid = this._search(_grid);
+
+    if (!solvedGrid) {
+      return false;
+    }
+
+    return solvedGrid;
   }
 
-  get grid() {
-    return this._grid;
-  }
+  _setPatternValues(grid) {
+    if (!(grid instanceof Grid)) {
+      throw new TypeError('private method setPatternValues\'s parameter must be a Grid');
+    }
 
-  setGridValues() {
-    let pattern = this._grid.pattern;
+    let pattern = grid.pattern;
 
     for (let i = 0, digit, result; i < pattern.length; i++) {
       digit = Number(pattern[i]);
@@ -18,33 +33,23 @@ class Solver {
       if (isNaN(digit) || digit === 0) {
         continue;
       }
-      result = this._grid.assignValue(digit, this._grid.cells[i]);
+      result = grid.assignValue(digit, grid.cells[i]);
 
       if (!result) {
         return false;
       }
     }
 
-    return this._grid;
-  }
-
-  solve() {
-    let solvedGrid = this.search(this.setGridValues());
-
-    if (!solvedGrid) {
-      return false;
-    }
-
-    for (let i = 0; i < this._grid._cells.length; i++) {
-      this._grid._cells[i] = solvedGrid.cells[i];
-    }
-
     return true;
   }
 
-  search(grid) {
+  _search(grid) {
     if (!grid) {
       return false;
+    }
+
+    if (!(grid instanceof Grid)) {
+      throw new TypeError('private method search\'s parameter must be a Grid');
     }
 
     if (grid.isSolved()) {
@@ -69,7 +74,7 @@ class Solver {
     for (let i = 0, copy, result; i < cellMinPossibleValues.cell.possibleValues.length; i++) {
       copy = Grid.copy(grid);
 
-      result = this.search(copy.assignValue(cellMinPossibleValues.cell.possibleValues[i], copy.cells[cellMinPossibleValues.index]));
+      result = this._search(copy.assignValue(cellMinPossibleValues.cell.possibleValues[i], copy.cells[cellMinPossibleValues.index]));
 
       if (result) {
         return result;

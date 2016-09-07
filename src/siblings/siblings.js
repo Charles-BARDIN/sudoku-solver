@@ -1,22 +1,30 @@
+const Cell = require('../cell/cell');
+
 class Siblings {
   constructor(grid) {
+    const Grid = require('../grid/grid');
+
+    if(!(grid instanceof Grid)) {
+      throw new TypeError('get\'s parameter must be a Grid');
+    }
+
     this._grid = grid;
 
     let dictionnary = new Map();
 
     for (let i = 0, cell; i < grid.cells.length; i++) {
       cell = grid.cells[i];
-      dictionnary.set(cell, this.getCellSiblings(cell));
+      dictionnary.set(cell, this._getCellSiblings(cell));
     }
 
     this._siblings = dictionnary;
   }
 
-  get(cell) {
-    return this._siblings.get(cell);
-  }
-
   eliminateValueFromSiblings(cell, value) {
+    if (typeof value !== 'number' && !(cell instanceof Cell)) {
+      throw new TypeError('eliminateValueFromSiblings\'s parameters must be a Cell and a number');
+    }
+
     let siblings = this._siblings.get(cell);
     for (let i = 0, success, wasResolved; i < siblings.length; i++) {
       wasResolved = siblings[i].isSolved();
@@ -42,6 +50,10 @@ class Siblings {
   }
 
   checkIfSiblingsAcceptValue(cell, value) {
+    if (typeof value !== 'number' && !(cell instanceof Cell)) {
+      throw new TypeError('checkIfSiblingsAcceptValue\'s parameters must be a Cell and a number');
+    }
+
     let cellsThatAccept = [];
     let siblings = this._siblings.get(cell);
 
@@ -54,10 +66,14 @@ class Siblings {
     return cellsThatAccept;
   }
 
-  getCellSiblings(cell) {
-    let row = this.getRow(cell);
-    let column = this.getColumn(cell);
-    let square = this.getSquare(cell);
+  _getCellSiblings(cell) {
+    if(!(cell instanceof Cell)) {
+      throw new TypeError('internal method getCellSiblings\'s parameter must be a Cell');
+    }
+
+    let row = this._getRow(cell);
+    let column = this._getColumn(cell);
+    let square = this._getSquare(cell);
 
     let siblings = [];
 
@@ -78,7 +94,11 @@ class Siblings {
     return siblings;
   }
 
-  getColumn(cell) {
+  _getColumn(cell) {
+    if(!(cell instanceof Cell)) {
+      throw new TypeError('internal method getColumn\'s parameter must be a Cell');
+    }
+
     let column = [];
     let index = this._grid.cells.indexOf(cell);
 
@@ -91,7 +111,11 @@ class Siblings {
     return column;
   }
 
-  getRow(cell) {
+  _getRow(cell) {
+    if(!(cell instanceof Cell)) {
+      throw new TypeError('internal method getRow\'s parameter must be a Cell');
+    }
+
     let column = [];
     let rowIndexes = {
       min: 0,
@@ -112,7 +136,11 @@ class Siblings {
     return column;
   }
 
-  getSquare(cell) {
+  _getSquare(cell) {
+    if(!(cell instanceof Cell)) {
+      throw new TypeError('internal method getSquare\'s parameter must be a Cell');
+    }
+
     let intervals = [];
     let index = this._grid.cells.indexOf(cell);
     let minVal = index - (index % 3);
