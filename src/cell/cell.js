@@ -26,7 +26,7 @@ class Cell {
     }
 
     if (this.isSolved() && value === this._value) {
-      return false;
+      return null;
     }
 
     this._possibleValues.remove(value);

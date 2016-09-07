@@ -9,12 +9,11 @@ class Solver {
     }
 
     let _grid = Grid.copy(grid);
-    this._setPatternValues(_grid);
 
-    let solvedGrid = this._search(_grid);
+    let solvedGrid = this._search(this._setPatternValues(_grid));
 
     if (!solvedGrid) {
-      return false;
+      return null;
     }
 
     return solvedGrid;
@@ -36,16 +35,16 @@ class Solver {
       result = grid.assignValue(digit, grid.cells[i]);
 
       if (!result) {
-        return false;
+        return null;
       }
     }
 
-    return true;
+    return grid;
   }
 
   _search(grid) {
     if (!grid) {
-      return false;
+      return null;
     }
 
     if (!(grid instanceof Grid)) {
@@ -81,7 +80,7 @@ class Solver {
       }
     }
 
-    return false;
+    return null;
   }
 }
 

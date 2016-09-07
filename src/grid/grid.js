@@ -63,7 +63,7 @@ module.exports = class Grid {
     let index = valuesToEliminate.indexOf(value);
 
     if (index === -1) {
-      return false;
+      return null;
     }
 
     valuesToEliminate.remove(value);
@@ -72,7 +72,7 @@ module.exports = class Grid {
       success = this._eliminateValueFromCell(valuesToEliminate[i], cell);
 
       if (!success) {
-        return false;
+        return null;
       }
     }
     return this;
@@ -117,7 +117,7 @@ module.exports = class Grid {
 
     let success = cell.eliminatePossibleValue(value);
     if (!success) {
-      return false;
+      return null;
     }
 
     this._setSiblings();
@@ -126,14 +126,14 @@ module.exports = class Grid {
       success = this._siblings.eliminateValueFromSiblings(cell, cell.value);
 
       if (!success) {
-        return false;
+        return null;
       }
     }
 
     success = this._checkSiblingsValue(cell, value);
 
     if (!success) {
-      return false;
+      return null;
     }
 
     return true;
@@ -147,14 +147,14 @@ module.exports = class Grid {
     let cellsThatAccept = this._siblings.checkIfSiblingsAcceptValue(cell, value);
 
     if (cellsThatAccept.length === 0) {
-      return false;
+      return null;
     }
 
     if (cellsThatAccept.length === 1) {
       let success = this.assignValue(value, cellsThatAccept[0]);
 
       if (!success) {
-        return false;
+        return null;
       }
     }
 

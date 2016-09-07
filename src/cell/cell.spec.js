@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const Cell = require('../cell/cell');
 
-require('../polyfills');
+require('../polyfills/polyfills');
 
 let cell;
 
@@ -45,17 +45,18 @@ describe('Class: Cell', () => {
           expect(() => {cell.eliminatePossibleValue('1');}).to.throw(TypeError);
           expect(() => {cell.eliminatePossibleValue([1]);}).to.throw(TypeError);
           expect(() => {cell.eliminatePossibleValue({});}).to.throw(TypeError);
+          expect(() => {cell.eliminatePossibleValue();}).to.throw(TypeError);
         });
 
         it('Should throw an error if the parameter is a number but does not belong to [1, 9]', () => {
           expect(() => {cell.eliminatePossibleValue(10);}).to.throw(RangeError);
         });
 
-        it('Should return false if it has encountered any inconsistency', () => {
+        it('Should return null if it has encountered any inconsistency', () => {
           cell._possibleValues = [9];
           cell._value = 9;
 
-          expect(cell.eliminatePossibleValue(9)).to.be.false;
+          expect(cell.eliminatePossibleValue(9)).to.be.null;
         });
 
         it('Should return true if it has not encountered any inconsistency', () => {
@@ -95,6 +96,7 @@ describe('Class: Cell', () => {
           expect(() => {cell.acceptsValue('1');}).to.throw(TypeError);
           expect(() => {cell.acceptsValue({});}).to.throw(TypeError);
           expect(() => {cell.acceptsValue([1]);}).to.throw(TypeError);
+          expect(() => {cell.acceptsValue();}).to.throw(TypeError);
         });
 
         it('Should accept a number as a parameter', () => {
@@ -105,7 +107,7 @@ describe('Class: Cell', () => {
           expect(cell.acceptsValue(1)).to.be.true;
         });
 
-        it('Should return false if the value is not a possible value of the cell', () => {
+        it('Should return null if the value is not a possible value of the cell', () => {
           cell._possibleValues = [1];
 
           expect(cell.acceptsValue(2)).to.be.false;
@@ -124,6 +126,7 @@ describe('Class: Cell', () => {
           expect(() => {Cell.copy('1');}).to.throw(TypeError);
           expect(() => {Cell.copy([1]);}).to.throw(TypeError);
           expect(() => {Cell.copy({});}).to.throw(TypeError);
+          expect(() => {Cell.copy();}).to.throw(TypeError);
         });
 
         it('Should return a Cell with the same value and possibleValues', () => {

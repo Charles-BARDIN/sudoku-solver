@@ -30,19 +30,19 @@ class Siblings {
       wasResolved = siblings[i].isSolved();
 
       if (siblings[i].value === value) {
-        return false;
+        return null;
       }
 
       success = siblings[i].eliminatePossibleValue(value);
       if (!success) {
-        return false;
+        return null;
       }
 
       if (siblings[i].isSolved() && !wasResolved) {
         success = this.eliminateValueFromSiblings(siblings[i], siblings[i].value);
 
         if (!success) {
-          return false;
+          return null;
         }
       }
     }
