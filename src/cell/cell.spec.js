@@ -38,18 +38,18 @@ describe('Class: Cell', () => {
     describe('Public', () => {
       describe('eliminatePossibleValue', () => {
         it('Should accept a number belonging to [1, 9] as a parameter', () => {
-          expect(() => {cell.eliminatePossibleValue(1);}).to.not.throw(TypeError);
+          expect(() => { cell.eliminatePossibleValue(1); }).to.not.throw(TypeError);
         });
 
         it('Should throw an error if the parameter is not a number', () => {
-          expect(() => {cell.eliminatePossibleValue('1');}).to.throw(TypeError);
-          expect(() => {cell.eliminatePossibleValue([1]);}).to.throw(TypeError);
-          expect(() => {cell.eliminatePossibleValue({});}).to.throw(TypeError);
-          expect(() => {cell.eliminatePossibleValue();}).to.throw(TypeError);
+          expect(() => { cell.eliminatePossibleValue('1'); }).to.throw(TypeError);
+          expect(() => { cell.eliminatePossibleValue([1]); }).to.throw(TypeError);
+          expect(() => { cell.eliminatePossibleValue({}); }).to.throw(TypeError);
+          expect(() => { cell.eliminatePossibleValue(); }).to.throw(TypeError);
         });
 
         it('Should throw an error if the parameter is a number but does not belong to [1, 9]', () => {
-          expect(() => {cell.eliminatePossibleValue(10);}).to.throw(RangeError);
+          expect(() => { cell.eliminatePossibleValue(10); }).to.throw(RangeError);
         });
 
         it('Should return null if it has encountered any inconsistency', () => {
@@ -93,14 +93,14 @@ describe('Class: Cell', () => {
 
       describe('acceptsValue', () => {
         it('Should throw an error if the parameter is not a number', () => {
-          expect(() => {cell.acceptsValue('1');}).to.throw(TypeError);
-          expect(() => {cell.acceptsValue({});}).to.throw(TypeError);
-          expect(() => {cell.acceptsValue([1]);}).to.throw(TypeError);
-          expect(() => {cell.acceptsValue();}).to.throw(TypeError);
+          expect(() => { cell.acceptsValue('1'); }).to.throw(TypeError);
+          expect(() => { cell.acceptsValue({}); }).to.throw(TypeError);
+          expect(() => { cell.acceptsValue([1]); }).to.throw(TypeError);
+          expect(() => { cell.acceptsValue(); }).to.throw(TypeError);
         });
 
         it('Should accept a number as a parameter', () => {
-          expect(() => {cell.acceptsValue(1);}).to.not.throw(TypeError);
+          expect(() => { cell.acceptsValue(1); }).to.not.throw(TypeError);
         });
 
         it('Should return true if the value is a possible value of the cell', () => {
@@ -118,15 +118,15 @@ describe('Class: Cell', () => {
     describe('Static', () => {
       describe('copy', () => {
         it('Should accept a Cell as a parameter', () => {
-          expect(() => {Cell.copy(cell);}).to.not.throw(TypeError);
+          expect(() => { Cell.copy(cell); }).to.not.throw(TypeError);
         });
 
         it('Should throw an error if the parameter is not a Cell', () => {
-          expect(() => {Cell.copy(1);}).to.throw(TypeError);
-          expect(() => {Cell.copy('1');}).to.throw(TypeError);
-          expect(() => {Cell.copy([1]);}).to.throw(TypeError);
-          expect(() => {Cell.copy({});}).to.throw(TypeError);
-          expect(() => {Cell.copy();}).to.throw(TypeError);
+          expect(() => { Cell.copy(1); }).to.throw(TypeError);
+          expect(() => { Cell.copy('1'); }).to.throw(TypeError);
+          expect(() => { Cell.copy([1]); }).to.throw(TypeError);
+          expect(() => { Cell.copy({}); }).to.throw(TypeError);
+          expect(() => { Cell.copy(); }).to.throw(TypeError);
         });
 
         it('Should return a Cell with the same value and possibleValues', () => {

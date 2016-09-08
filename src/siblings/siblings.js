@@ -4,7 +4,7 @@ class Siblings {
   constructor(grid) {
     const Grid = require('../grid/grid');
 
-    if(!(grid instanceof Grid)) {
+    if (!(grid instanceof Grid)) {
       throw new TypeError('get\'s parameter must be a Grid');
     }
 
@@ -67,7 +67,7 @@ class Siblings {
   }
 
   _getCellSiblings(cell) {
-    if(!(cell instanceof Cell)) {
+    if (!(cell instanceof Cell)) {
       throw new TypeError('internal method getCellSiblings\'s parameter must be a Cell');
     }
 
@@ -95,7 +95,7 @@ class Siblings {
   }
 
   _getColumn(cell) {
-    if(!(cell instanceof Cell)) {
+    if (!(cell instanceof Cell)) {
       throw new TypeError('internal method getColumn\'s parameter must be a Cell');
     }
 
@@ -112,7 +112,7 @@ class Siblings {
   }
 
   _getRow(cell) {
-    if(!(cell instanceof Cell)) {
+    if (!(cell instanceof Cell)) {
       throw new TypeError('internal method getRow\'s parameter must be a Cell');
     }
 
@@ -137,7 +137,7 @@ class Siblings {
   }
 
   _getSquare(cell) {
-    if(!(cell instanceof Cell)) {
+    if (!(cell instanceof Cell)) {
       throw new TypeError('internal method getSquare\'s parameter must be a Cell');
     }
 

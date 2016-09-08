@@ -1,7 +1,7 @@
 const Cell = require('../cell/cell');
 const Siblings = require('../siblings/siblings');
 
-module.exports = class Grid {
+class Grid {
   constructor(pattern) {
     if (typeof pattern !== 'string' && !(pattern instanceof Array)) {
       throw new TypeError('Grid\'s constuctor\'s parameter must be a string or an array of strings');
@@ -208,4 +208,6 @@ module.exports = class Grid {
     }
     console.log(output);
   }
-};
+}
+
+module.exports = Grid;
