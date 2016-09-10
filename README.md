@@ -58,19 +58,19 @@ The algorithm is in two parts:
 Here are the definitions of the terms used in this program: 
 
 #### grid 
-a 9 x 9 sudoku grid
+A 9 x 9 sudoku grid
 
 #### cell
-a grid is composed of 81 cells that can have an integer value between 1 and 9 included
+A grid is composed of 81 cells that can have an integer value between 1 and 9 included
 
 #### sibling
-a sibling of a cell is a cell that belongs to the same row, column or square
+A sibling of a cell is a cell that belongs to the same row, column or square
 
 #### square
-a grid is composed of 9 squares that are 3 x 3 subgrids
+A grid is composed of 9 squares that are 3 x 3 subgrids
 
 #### solved
-a cell is solved if its value is determinated, a grid is solved if all its cell are solved 
+A cell is solved if its value is determinated. A grid is solved if all its cell are solved 
 
 ### Assigning value
 In this part of the algorithm, the values from the pattern are assigned to the grid. This is suffiscent to complete the simplest sudoku grids.
