@@ -13,5 +13,9 @@ Array.prototype.remove = function (item) {
 };
 
 Array.copy = function (array) {
+  if(!(array instanceof Array)) {
+    throw new TypeError('Array.copy accepts an array as parameter');
+  }
+
   return array.slice();
 };
