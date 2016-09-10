@@ -3,6 +3,28 @@
 This repository is a sudoku solver written in ES6. 
 
 ## How to use
+To module can be used like this
+```js
+const sudoku = require('./local/path/to/sudoku-solver');
+const Grid = sudoku.Grid;
+const Solver = sudoku.Solver;
+const pattern = '8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4..';
+
+// Creates a new Grid
+let grid = new Grid(pattern);
+// Creates a Solver
+let solver = new Solver();
+let solved_grid;
+
+// Displays the pattern as a grid
+grid.displayPattern();
+
+// Solves the grid
+solved_grid = solver.solve(grid);
+
+// Displays the grid
+solved_grid.displayGrid();
+```
 
 ## Demo
 To launch the demo, run
