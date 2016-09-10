@@ -97,7 +97,7 @@ A cell is solved if its value is determinated. A grid is solved if all its cell 
 ### Assigning value
 In this part of the algorithm, the values from the pattern are assigned to the grid. This is suffiscent to complete the simplest sudoku grids.
 
-To assign a value to a cell, it actually remove all the other possible values of the cell.
+To assign a value to a cell, it actually removes all the other possible values of the cell.
 Each time a value is removed, it checks if it permits to assign a value to a sibling by looking if only one sibling can accept the value
 
 Each time a value is assigned to a cell, it is removed from the possible values of the siblings. If a sibling has only one possible value, the value is assigned to the sibling.
