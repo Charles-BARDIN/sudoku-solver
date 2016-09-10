@@ -20,6 +20,8 @@ class Grid {
           throw new TypeError('Grid\'s constructor parameter is in wrong format');
         }
       }
+
+      pattern = pattern.join('');
     }
 
     this._cells = [];
