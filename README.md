@@ -3,7 +3,7 @@
 This repository is a sudoku solver written in ES6. 
 
 ## How to use
-To module can be used like this
+The module can be used like this
 ```js
 const sudoku = require('./local/path/to/sudoku-solver');
 const Grid = sudoku.Grid;
