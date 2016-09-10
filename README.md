@@ -74,7 +74,7 @@ npm test
 ```
 
 ## Algorithm
-The algorithm is in two parts:
+The algorithm composed of two parts:
 * assign the values from the pattern to the grid
 * search the values for the cells that are not solved
 
