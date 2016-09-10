@@ -55,7 +55,7 @@ class Grid {
   }
 
   assignValue(value, cell) {
-    if (typeof value !== 'number' && !(cell instanceof Cell)) {
+    if (!(typeof value === 'number' && cell instanceof Cell)) {
       throw new TypeError('assignValue\'s parameters must be a number and a Cell');
     }
 
