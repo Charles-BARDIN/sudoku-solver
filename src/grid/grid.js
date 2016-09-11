@@ -80,14 +80,6 @@ class Grid {
     return this;
   }
 
-  displayPattern() {
-    this._display(this._pattern);
-  }
-
-  displayGrid() {
-    this._display(this._cells);
-  }
-
   static copy(toCopy) {
     if (!(toCopy instanceof Grid)) {
       throw new TypeError('static method copy\'s parameter must be a Grid');
@@ -161,54 +153,6 @@ class Grid {
     }
 
     return true;
-  }
-
-  _display(item) {
-    let type;
-    if (typeof item === 'string') {
-      type = 'string';
-    } else if (item instanceof Array) {
-      type = 'cell';
-    } else {
-      throw new TypeError('private method display\'s parameter must be a string or an array of Cells');
-    }
-
-    if (item.length !== 81) {
-      throw new RangeError('private method display\'s parameter must be 81 long');
-    }
-
-    if (type === 'cell') {
-      for (let i = 0; i < item.length; i++) {
-        if (!(item[i] instanceof Cell)) {
-          throw new TypeError('the array must be composed of Cells');
-        }
-      }
-    }
-
-    let output = '';
-    let divider = '\n------ ------- ------\n';
-
-    let last = item.length - 1;
-    for (let i = 0, cell; i < (last + 1); i++) {
-      cell = item[i];
-
-      if (type === 'string') {
-        output += Number(cell) ? cell : '.';
-      } else {
-        output += (cell.value) ? (cell.value) : ('.');
-      }
-
-      output += ' ';
-
-      if ((i % 27 === 26) && (i !== last)) {
-        output += divider;
-      } else if (i % 9 === 8) {
-        output += '\n';
-      } else if (i % 3 === 2) {
-        output += '| ';
-      }
-    }
-    console.log(output);
   }
 }
 
