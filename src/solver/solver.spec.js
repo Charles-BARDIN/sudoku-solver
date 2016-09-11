@@ -8,8 +8,6 @@ const pattern_bad = '11.........................................................
 
 let solver, grid, hard_grid;
 
-require('../polyfills/polyfills');
-
 describe('Class: Solver', () => {
   describe('Methods', () => {
     beforeEach(() => {

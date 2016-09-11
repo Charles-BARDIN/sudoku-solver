@@ -1,8 +1,6 @@
 const expect = require('chai').expect;
 const Cell = require('../cell/cell');
 
-require('../polyfills/polyfills');
-
 let cell;
 
 describe('Class: Cell', () => {

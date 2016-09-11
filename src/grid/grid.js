@@ -61,14 +61,14 @@ class Grid {
       throw new TypeError('assignValue\'s parameters must be a number and a Cell');
     }
 
-    let valuesToEliminate = Array.copy(cell.possibleValues);
+    let valuesToEliminate = (cell.possibleValues).slice();
     let index = valuesToEliminate.indexOf(value);
 
     if (index === -1) {
       return null;
     }
 
-    valuesToEliminate.remove(value);
+    valuesToEliminate.splice(valuesToEliminate.indexOf(value), 1);
 
     for (let i = 0, success; i < valuesToEliminate.length; i++) {
       success = this._eliminateValueFromCell(cell, valuesToEliminate[i]);
