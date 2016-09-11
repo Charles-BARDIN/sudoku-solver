@@ -56,7 +56,7 @@ class Grid {
     return true;
   }
 
-  assignValue(value, cell) {
+  assignValue(cell, value) {
     if (!(typeof value === 'number' && cell instanceof Cell)) {
       throw new TypeError('assignValue\'s parameters must be a number and a Cell');
     }
@@ -71,7 +71,7 @@ class Grid {
     valuesToEliminate.remove(value);
 
     for (let i = 0, success; i < valuesToEliminate.length; i++) {
-      success = this._eliminateValueFromCell(valuesToEliminate[i], cell);
+      success = this._eliminateValueFromCell(cell, valuesToEliminate[i]);
 
       if (!success) {
         return null;
@@ -112,7 +112,7 @@ class Grid {
     this._siblings = new Siblings(this);
   }
 
-  _eliminateValueFromCell(value, cell) {
+  _eliminateValueFromCell(cell, value) {
     if (typeof value !== 'number' && !(cell instanceof Cell)) {
       throw new TypeError('private method eliminateValueFromCell\'s parameters must be a number and a Cell');
     }
@@ -132,7 +132,7 @@ class Grid {
       }
     }
 
-    success = this._checkSiblingsValue(cell, value);
+    success = this._checkValueForSiblings(cell, value);
 
     if (!success) {
       return null;
@@ -141,9 +141,9 @@ class Grid {
     return true;
   }
 
-  _checkSiblingsValue(cell, value) {
+  _checkValueForSiblings(cell, value) {
     if (typeof value !== 'number' && !(cell instanceof Cell)) {
-      throw new TypeError('private method checkSiblingsValue\'s parameters must be a number and a Cell');
+      throw new TypeError('private method checkValueForSiblings\'s parameters must be a number and a Cell');
     }
 
     let cellsThatAccept = this._siblings.checkIfSiblingsAcceptValue(cell, value);
@@ -153,7 +153,7 @@ class Grid {
     }
 
     if (cellsThatAccept.length === 1) {
-      let success = this.assignValue(value, cellsThatAccept[0]);
+      let success = this.assignValue(cellsThatAccept[0], value);
 
       if (!success) {
         return null;

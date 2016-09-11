@@ -32,7 +32,7 @@ class Solver {
       if (isNaN(digit) || digit === 0) {
         continue;
       }
-      result = grid.assignValue(digit, grid.cells[i]);
+      result = grid.assignValue(grid.cells[i], digit);
 
       if (!result) {
         return null;
@@ -73,7 +73,7 @@ class Solver {
     for (let i = 0, copy, result; i < cellMinPossibleValues.cell.possibleValues.length; i++) {
       copy = Grid.copy(grid);
 
-      result = this._search(copy.assignValue(cellMinPossibleValues.cell.possibleValues[i], copy.cells[cellMinPossibleValues.index]));
+      result = this._search(copy.assignValue(copy.cells[cellMinPossibleValues.index], cellMinPossibleValues.cell.possibleValues[i]));
 
       if (result) {
         return result;

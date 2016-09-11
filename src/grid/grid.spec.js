@@ -116,25 +116,25 @@ describe('Class: Grid', () => {
 
       describe('assignValue', () => {
         it('Should accept a number and a Cell as parameters', () => {
-          expect(() => { grid.assignValue(1, grid.cells[0]); }).to.not.throw();
+          expect(() => { grid.assignValue(grid.cells[0], 1); }).to.not.throw();
         });
 
         it('Should throw an error if the parameters are not a number and a Cell', () => {
-          expect(() => { grid.assignValue(null, grid.cells[0]); }).to.throw(TypeError);
-          expect(() => { grid.assignValue([], grid.cells[0]); }).to.throw(TypeError);
-          expect(() => { grid.assignValue('1', grid.cells[0]); }).to.throw(TypeError);
-          expect(() => { grid.assignValue({}, grid.cells[0]); }).to.throw(TypeError);
-          expect(() => { grid.assignValue(1); }).to.throw(TypeError);
-          expect(() => { grid.assignValue(1, []); }).to.throw(TypeError);
-          expect(() => { grid.assignValue(1, 'foo'); }).to.throw(TypeError);
-          expect(() => { grid.assignValue(1, {}); }).to.throw(TypeError);
-          expect(() => { grid.assignValue([], 'bar'); }).to.throw(TypeError);
-          expect(() => { grid.assignValue({}, []); }).to.throw(TypeError);
-          expect(() => { grid.assignValue('foobar', 1); }).to.throw(TypeError);
+          expect(() => { grid.assignValue(grid.cells[0]); }).to.throw(TypeError);
+          expect(() => { grid.assignValue(grid.cells[0], []); }).to.throw(TypeError);
+          expect(() => { grid.assignValue(grid.cells[0], '1'); }).to.throw(TypeError);
+          expect(() => { grid.assignValue(grid.cells[0], {}); }).to.throw(TypeError);
+          expect(() => { grid.assignValue(null, 1); }).to.throw(TypeError);
+          expect(() => { grid.assignValue([], 1); }).to.throw(TypeError);
+          expect(() => { grid.assignValue('foo', 1); }).to.throw(TypeError);
+          expect(() => { grid.assignValue({}, 1); }).to.throw(TypeError);
+          expect(() => { grid.assignValue('bar', []); }).to.throw(TypeError);
+          expect(() => { grid.assignValue([], {}); }).to.throw(TypeError);
+          expect(() => { grid.assignValue(1, 'foobar'); }).to.throw(TypeError);
         });
 
         it('Should have assigned the value to the cell', () => {
-          grid.assignValue(1, grid.cells[0]);
+          grid.assignValue(grid.cells[0], 1);
 
           expect(grid.cells[0].isSolved()).to.be.true;
           expect(grid.cells[0].value).to.equal(1);
@@ -143,27 +143,27 @@ describe('Class: Grid', () => {
 
         it('Should call its private method eliminateValueFromCell with all the other possible values', () => {
           spy = chai.spy.on(grid, '_eliminateValueFromCell');
-          grid.assignValue(1, grid.cells[0]);
+          grid.assignValue(grid.cells[0], 1);
 
-          expect(spy).to.have.been.called.with(2, grid.cells[0]);
-          expect(spy).to.have.been.called.with(3, grid.cells[0]);
-          expect(spy).to.have.been.called.with(4, grid.cells[0]);
-          expect(spy).to.have.been.called.with(5, grid.cells[0]);
-          expect(spy).to.have.been.called.with(6, grid.cells[0]);
-          expect(spy).to.have.been.called.with(7, grid.cells[0]);
-          expect(spy).to.have.been.called.with(8, grid.cells[0]);
-          expect(spy).to.have.been.called.with(9, grid.cells[0]);
+          expect(spy).to.have.been.called.with(grid.cells[0], 2);
+          expect(spy).to.have.been.called.with(grid.cells[0], 3);
+          expect(spy).to.have.been.called.with(grid.cells[0], 4);
+          expect(spy).to.have.been.called.with(grid.cells[0], 5);
+          expect(spy).to.have.been.called.with(grid.cells[0], 6);
+          expect(spy).to.have.been.called.with(grid.cells[0], 7);
+          expect(spy).to.have.been.called.with(grid.cells[0], 8);
+          expect(spy).to.have.been.called.with(grid.cells[0], 9);
 
         });
 
         it('Should return null if the value to assign does not belong to the possible values of the cell', () => {
           grid.cells[0]._possibleValues = [2, 3, 4, 5, 6, 7, 8, 9];
 
-          expect(grid.assignValue(1, grid.cells[0])).to.be.null;
+          expect(grid.assignValue(grid.cells[0], 1)).to.be.null;
         });
 
         it('Should return itself if it did not encounter any inconsistencies', () => {
-          expect(grid.assignValue(1, grid.cells[0])).to.equal(grid);
+          expect(grid.assignValue(grid.cells[0], 1)).to.equal(grid);
         });
       });
     });
@@ -179,27 +179,27 @@ describe('Class: Grid', () => {
 
       describe('eliminateValueFromCell', () => {
         it('Should accept a number and a cell as a parameter', () => {
-          expect(() => { grid._eliminateValueFromCell(1, grid.cells[0]); }).to.not.throw();
+          expect(() => { grid._eliminateValueFromCell(grid.cells[0], 1); }).to.not.throw();
         });
 
         it('Should throw an error if the parameters are not a number and a cell', () => {
-          expect(() => { grid._eliminateValueFromCell(null, grid.cells[0]); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell([], grid.cells[0]); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell('1', grid.cells[0]); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell({}, grid.cells[0]); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell(1); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell(1, []); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell(1, 'foo'); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell(1, {}); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell([], 'bar'); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell({}, []); }).to.throw(TypeError);
-          expect(() => { grid._eliminateValueFromCell('foobar', 1); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell(grid.cells[0]); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell(grid.cells[0], []); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell(grid.cells[0], '1'); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell(grid.cells[0], {}); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell(null, 1); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell([], 1); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell('foo', 1); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell({}, 1); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell('bar', []); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell([], {}); }).to.throw(TypeError);
+          expect(() => { grid._eliminateValueFromCell(1, 'foobar'); }).to.throw(TypeError);
         });
 
         it('Should call the isSolved method of the cell', () => {
           spy = chai.spy.on(grid.cells[0], 'isSolved');
 
-          grid._eliminateValueFromCell(1, grid.cells[0]);
+          grid._eliminateValueFromCell(grid.cells[0], 1);
 
           expect(spy).to.have.been.called();
         });
@@ -207,7 +207,7 @@ describe('Class: Grid', () => {
         it('Should call its private method setSiblings', () => {
           spy = chai.spy.on(grid, '_setSiblings');
 
-          grid._eliminateValueFromCell(1, grid.cells[0]);
+          grid._eliminateValueFromCell(grid.cells[0], 1);
 
           expect(spy).to.have.been.called();
         });
@@ -217,22 +217,22 @@ describe('Class: Grid', () => {
           spy = chai.spy.on(grid._siblings, 'eliminateValueFromSiblings');
           grid._cells[0]._possibleValues = [1, 2];
 
-          grid._eliminateValueFromCell(1, grid.cells[0]);
+          grid._eliminateValueFromCell(grid.cells[0], 1);
 
           expect(grid.cells[0].isSolved()).to.be.true;
           expect(spy).to.have.been.called.with(grid.cells[0], 2);
         });
 
-        it('Should call the checkSiblingsValue private method', () => {
-          spy = chai.spy.on(grid, '_checkSiblingsValue');
+        it('Should call the checkValueForSiblings private method', () => {
+          spy = chai.spy.on(grid, '_checkValueForSiblings');
 
-          grid._eliminateValueFromCell(1, grid.cells[0]);
+          grid._eliminateValueFromCell(grid.cells[0], 1);
 
           expect(spy).to.have.been.called.with(grid.cells[0], 1);
         });
 
         it('Should have eliminated the value from the cell\'s possible values', () => {
-          grid._eliminateValueFromCell(1, grid.cells[0]);
+          grid._eliminateValueFromCell(grid.cells[0], 1);
 
           expect(grid.cells[0].possibleValues).to.have.members([2, 3, 4, 5, 6, 7, 8, 9]);
         });
@@ -241,41 +241,41 @@ describe('Class: Grid', () => {
           grid.cells[0]._possibleValues = [1];
           grid.cells[0]._value = 1;
 
-          expect(grid._eliminateValueFromCell(1, grid.cells[0])).to.be.null;
+          expect(grid._eliminateValueFromCell(grid.cells[0], 1)).to.be.null;
         });
 
         it('Should return true if it has not occured any inconsistencies', () => {
-          expect(grid._eliminateValueFromCell(1, grid.cells[0])).to.be.true;
+          expect(grid._eliminateValueFromCell(grid.cells[0], 1)).to.be.true;
         });
       });
 
-      describe('checkSiblingsValue', () => {
+      describe('checkValueForSiblings', () => {
         beforeEach(() => {
           grid._setSiblings();
         });
 
         it('Should accept a Cell and a number as parameters', () => {
-          expect(() => { grid._checkSiblingsValue(grid.cells[0], 1); }).to.not.throw();
+          expect(() => { grid._checkValueForSiblings(grid.cells[0], 1); }).to.not.throw();
         });
 
         it('Should throw an error if the parameters are not a Cell and a number', () => {
-          expect(() => { grid._checkSiblingsValue(grid.cells[0]); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue(grid.cells[0], []); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue(grid.cells[0], '1'); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue(grid.cells[0], {}); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue(null, 1); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue([], 1); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue('foo', 1); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue({}, 1); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue('bar', []); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue([], {}); }).to.throw(TypeError);
-          expect(() => { grid._checkSiblingsValue(1, 'foobar'); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings(grid.cells[0]); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings(grid.cells[0], []); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings(grid.cells[0], '1'); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings(grid.cells[0], {}); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings(null, 1); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings([], 1); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings('foo', 1); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings({}, 1); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings('bar', []); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings([], {}); }).to.throw(TypeError);
+          expect(() => { grid._checkValueForSiblings(1, 'foobar'); }).to.throw(TypeError);
         });
 
         it('Should call the checkIfSiblingsAcceptValue of its siblings', () => {
           spy = chai.spy.on(grid._siblings, 'checkIfSiblingsAcceptValue');
 
-          grid._checkSiblingsValue(grid.cells[0], 1);
+          grid._checkValueForSiblings(grid.cells[0], 1);
 
           expect(spy).to.have.been.called.with(grid.cells[0], 1);
         });
@@ -290,13 +290,13 @@ describe('Class: Grid', () => {
 
           expect(grid._siblings.checkIfSiblingsAcceptValue(grid.cells[0], 1).length).to.equal(1);
 
-          grid._checkSiblingsValue(grid.cells[0], 1);
+          grid._checkValueForSiblings(grid.cells[0], 1);
 
-          expect(spy).to.have.been.called.with(1, siblings[0]);
+          expect(spy).to.have.been.called.with(siblings[0], 1);
         });
 
         it('Shouls return true if it has not occured any inconsistencies', () => {
-          expect(grid._checkSiblingsValue(grid.cells[0], 1)).to.be.true;
+          expect(grid._checkValueForSiblings(grid.cells[0], 1)).to.be.true;
         });
 
         it('Should return null if it has occured any inconsistencies', () => {
@@ -306,7 +306,7 @@ describe('Class: Grid', () => {
             siblings[i]._possibleValues = [2, 3, 4, 5, 6, 7, 8, 9];
           }
 
-          expect(grid._checkSiblingsValue(grid.cells[0], 1)).to.be.null;
+          expect(grid._checkValueForSiblings(grid.cells[0], 1)).to.be.null;
         });
       });
     });
