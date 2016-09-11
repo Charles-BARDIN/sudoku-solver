@@ -1,6 +1,6 @@
 {
   "name": "sudoku_solver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/Charles-BARDIN/sudoku-solver",
   "bugs": "https://github.com/Charles-BARDIN/sudoku-solver/issues",
   "description": "A package that solves any 9 x 9 sudoku grids",
