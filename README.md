@@ -3,29 +3,27 @@
 This repository is a sudoku solver written in ES6. 
 
 ## How to use
+Install the package from npm
+```
+npm install --save sudoku_solver
+```
 The module can be used like this
 ```js
-const sudoku = require('./local/path/to/sudoku-solver');
+const sudoku = require('sudoku_solver');
 const Grid = sudoku.Grid;
 const Solver = sudoku.Solver;
 const pattern = '8..........36......7..9.2...5...7.......457.....1...3...1....68..85...1..9....4..';
 
-// Creates a new Grid
+// Creates a Grid
 let grid = new Grid(pattern);
 // Creates a Solver
 let solver = new Solver();
 let solved_grid;
 
-// Displays the pattern as a grid
-grid.displayPattern();
-
 // Solves the grid
 solved_grid = solver.solve(grid);
-
-// Displays the grid
-solved_grid.displayGrid();
 ```
-
+The pattern of the grid can be a string, an array of strings or an array of numbers.
 ## Demo
 To launch the demo, run
 ```
@@ -63,7 +61,7 @@ Solved in 1,340.255ms
 7  9  6  |  3  1  8  |  4  5  2
 ```
 
-The grid from the demo comes from [here](http://puzzling.stackexchange.com/questions/252/how-do-i-solve-the-worlds-hardest-sudoku).
+The grid from the demo comes from [the most difficult sudoku grid](http://puzzling.stackexchange.com/questions/252/how-do-i-solve-the-worlds-hardest-sudoku).
 
 ## Tests
 To launch the tests, run
