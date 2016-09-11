@@ -17,14 +17,11 @@
   },
   "scripts": {
     "test": "mocha \"./src/**/*.spec.js\"",
-    "build": "babel src -d lib --ignore spec.js",
     "demo": "node demo"
   },
   "author": "Charles BARDIN <charles.bardin.pro@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.14.0",
-    "babel-preset-es2015": "^6.14.0",
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
     "mocha": "^3.0.2"
