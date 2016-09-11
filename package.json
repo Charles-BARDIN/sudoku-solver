@@ -19,8 +19,8 @@
     "test": "mocha \"./src/**/*.spec.js\"",
     "demo": "node demo"
   },
-  "author": "Charles BARDIN <bardincharles@gmail.com>",
-  "license": "ISC",
+  "author": "Charles BARDIN <charles.bardin.pro@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
