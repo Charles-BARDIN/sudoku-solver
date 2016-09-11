@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "homepage": "https://github.com/Charles-BARDIN/sudoku-solver",
   "bugs": "https://github.com/Charles-BARDIN/sudoku-solver/issues",
-  "description": "This package is a sudoku solver",
+  "description": "A package that solves any 9 x 9 sudoku grids",
   "main": "index.js",
   "engines": {
     "node": ">= 6"
